@@ -12,7 +12,7 @@ jobs:
           ls -la
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
-          echo "${{ github.token }}"
+          echo "${{ github }}"
       - name: checkout the repo
         uses: actions/checkout@v1
       - name: List files
