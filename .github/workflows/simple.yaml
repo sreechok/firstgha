@@ -9,5 +9,11 @@ jobs:
       - name: echo first step
         run: echo this is my first step
 
-        
+      - name: first action
+        id: greet
+        uses: actions/hello-world-javascript-action@v1.1
+        with:
+          who-to-greet: sreeni
+      - name: output from greet
+        run: echo "{{ steps.greet.outputs.time}}"
 
