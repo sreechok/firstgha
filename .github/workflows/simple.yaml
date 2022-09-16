@@ -12,7 +12,7 @@ jobs:
           ls -la
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
-          echo "${{ github.event }}"
+          echo "${{ github.actor }}"
       - name: checkout the repo
         uses: actions/checkout@v1
       - name: List files
