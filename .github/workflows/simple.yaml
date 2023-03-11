@@ -12,6 +12,7 @@ jobs:
           ls -la
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
           echo "${{ github.actor }}"
       - name: checkout the repo
         uses: actions/checkout@v1
