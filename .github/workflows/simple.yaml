@@ -1,6 +1,6 @@
 name: My first github actions
 
-on: [pull_request]
+on: [push]
 
 jobs:
   run-github-actions:
