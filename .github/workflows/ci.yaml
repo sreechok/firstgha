@@ -16,3 +16,4 @@ jobs:
       - name: deploy to dev
         run: |
           echo deploying to dev
+          echo deploying to stg too
