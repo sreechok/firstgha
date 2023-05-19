@@ -1,0 +1,14 @@
+name: Continous Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  first_jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "say hello"
+        run: |
+          echo "deployig to master branch"
