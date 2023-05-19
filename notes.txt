@@ -1,0 +1,69 @@
+<!-- **STOP and  READ** **USE THIS TEMPLATE** **NO EXCEPTIONS**:
+Please show the effort you've put in to solving the problem and please be specific -- people are volunteering their time to help you! Low effort posts are not likely to get good answers!   **DO NOT REDACT** any information except passwords/keys/personal info.  You should use 3 backticks to begin and end your paste to make it readable.  Or use a service such as https://pastebin.com or https://gist.github.com/   -->
+
+#### What is the problem you are having with rclone?
+1.58.1
+
+#### Run the command 'rclone version' and share the full output of the command.
+
+<!-- **STOP and  READ**:
+Do not type in "Latest".
+Do not just type in a version number. Run the command and share the full output.
+
+Are you on the latest version of rclone? You can validate by checking the version listed here: https://rclone.org/downloads/
+ -->
+
+####  Which cloud storage system are you using? (eg Google Drive)
+AWS S3
+
+#### The command you were trying to run (eg `rclone copy /tmp remote:tmp`)
+<!--  You should use 3 backticks to begin and end your paste to make it readable.   -->
+// running as a rclone webserver on a GKE cluster as kubernetes deployment:
+```
+     rclone
+      rcd
+      --rc-addr
+      :5572
+```
+
+
+#### The rclone config contents with secrets removed.
+<!--  You should use 3 backticks to begin and end your paste to make it readable.   -->
+
+```
+// gcs config in the rclone.conf file
+    [gcs]
+    type = google cloud storage
+    project_number = xxxxxxxx
+    object_acl = bucketOwnerFullControl
+    bucket_acl = private
+    bucket_policy_only = true
+    location = europe-west2
+    storage_class = STANDARD
+
+// on webserver pod running as environment vars for the remote
+      RCLONE_RC_ENABLE_METRICS:                      true
+      RCLONE_CONFIG_FS_ACCESS_KEY_ID:      <set to the key 'access_key_id' in secret 'stg-rclone-webserver-featurespace-oci-creds'>  Optional: false
+      RCLONE_CONFIG_FS_ENDPOINT:
+      RCLONE_CONFIG_FS_SECRET_ACCESS_KEY:  <set to the key 'secret_access_key' in secret 'stg-rclone-webserver-featurespace-oci-creds'>  Optional: false
+      RCLONE_CONFIG_FS_TYPE:               s3
+      RCLONE_CONFIG_FS_REGION:             eu-west-2
+      RCLONE_RC_USER:                                <set to the key 'rclone_user' in secret 'stg-rclone-webserver-creds'>      Optional: false
+      RCLONE_RC_PASS:                                <set to the key 'rclone_password' in secret 'stg-rclone-webserver-creds'>  Optional: false
+      RCLONE_WEB_GUI:                                true
+      RCLONE_WEB_GUI_NO_OPEN_BROWSER:                true
+```
+
+
+
+#### A log from the command with the `-vv` flag
+<!-- You should use 3 backticks to begin and end your paste to make it readable.  Or use a service such as https://pastebin.com or https://gist.github.com/   -->
+
+```
+2022/09/22 17:45:41 DEBUG : --max-age 1d to 2022-09-21 17:45:41.39214167 +0000 UTC m=-86399.934854412
+2022/09/22 17:45:41 DEBUG : rclone: Version "v1.58.1" starting with parameters ["rclone" "rc" "--rc-addr=10.0.32.119:5572" "--rc-user=xxx" "--rc-pass=xxxxxxx" "sync/copy" "srcFs=featurespace:dev-dojo-featurespace-data/" "dstFs=gcs:ps-data-mdm-dev-featurespace/" "--max-age" "1d" "--timeout" "20m" "--no-traverse" "--update" "--use-server-modtime" "-vvv"]
+2022/09/22 17:52:33 DEBUG : 2 go routines active
+2022/09/22 17:52:33 Failed to rc: connection failed: Post "http://10.0.32.119:5572/sync/copy": EOF
+```
+
+I'm running the rclone as webserver on a GKE cluster and running a cronjob within the same cluster, to copy data from a AWS S3 bucket to GCS bucket, getting this EOF error. Sometimes it working and sometimes I get this error. There are lots of files that gets checked and then copies only the new files.
