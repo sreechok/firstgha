@@ -2,7 +2,8 @@ Name: Continous Deployment
 
 on:
   push:
-    - master
+    branches:
+      - master
 
 job:
   first_jobs:
