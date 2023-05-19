@@ -1,6 +1,5 @@
 name: Context
 on: [pull_request]
-# - push
 
 jobs:
   functions:
