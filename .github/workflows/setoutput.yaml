@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: step1
-        run: echo "test1=hello" >> $GITHUB_OUTPUT
+        run: echo "test=hello" >> $GITHUB_OUTPUT
       - id: step2
-        run: echo "test2=world" >> $GITHUB_OUTPUT
+        run: echo "test=world" >> $GITHUB_OUTPUT
       - name: print values
         run: |
-          echo ${{ steps.step1.outputs.test1 }}
-          echo ${{ steps.step2.outputs.test2 }}
+          echo ${{ steps.step1.outputs.test }}
+          echo ${{ steps.step2.outputs.test }}
