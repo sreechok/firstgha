@@ -12,7 +12,9 @@ jobs:
       id: date
       run: echo "name=date::$(date +‘%Y-%m-%dT%H:%M’)" >> $GITHUB_OUTPUT
     - name: Merge master back to staging
-      run: echo ${{ steps.date.outputs.date }}
+      run: |
+        echo ${{ steps.date.outputs.date }}
+        echo ${{ steps.date.outputs.name }}
 
 
 #jobs:
