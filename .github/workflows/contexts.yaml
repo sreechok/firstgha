@@ -14,7 +14,7 @@ jobs:
   dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
+      - name: Dump gitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
       - name: Dump job context
